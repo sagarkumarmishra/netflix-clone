@@ -11,9 +11,7 @@ interface Inputs {
 
 const Login = () => {
     const [login, setLogin] = useState(false)
-    const {signIn, signUp, loginErr} = useAuth()
-
-
+    const {signIn, signUp, loginErr} = useAuth()    
     const [learnMore, setLearnMore] = useState(false)
     // const [show, setShow] = useState(false)  //for show hide button
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();

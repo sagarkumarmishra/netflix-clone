@@ -29,7 +29,7 @@ const Login = () => {
   return (
     <div className='relative flex h-screen w-screen bg-black flex-col md:items-center md:justify-center md:bg-transparent'>
         <Head>
-            <title>Netflix-Login</title>
+            <title>Login-Netflix</title>
             <link rel="icon" href="/favicon.ico" />
         </Head>
 

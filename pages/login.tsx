@@ -1,3 +1,4 @@
+import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im'
 import Head from 'next/head'
 import Image from 'next/image'
 import React, { useState } from 'react'
@@ -15,6 +16,7 @@ const Login = () => {
     const [learnMore, setLearnMore] = useState(false)
     // const [show, setShow] = useState(false)  //for show hide button
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+    const [rememberMe, setRememberMe] = useState(true)
 
     const onSubmit: SubmitHandler<Inputs> = async({email, password}) => {
         if(login){
@@ -27,7 +29,7 @@ const Login = () => {
   return (
     <div className='relative flex h-screen w-screen bg-black flex-col md:items-center md:justify-center md:bg-transparent'>
         <Head>
-            <title>Login-Netflix</title>
+            <title>Netflix</title>
             <link rel="icon" href="/favicon.ico" />
         </Head>
 
@@ -95,11 +97,21 @@ const Login = () => {
             </div>
 
             <button 
-                className='w-full rounded bg-[#e50914] py-3 font-semibold' 
+                className='w-full rounded bg-[#e50914] py-3 font-semibold !mt-10' 
                 onClick={()=>setLogin(true)}
             >
                 Sign In
             </button>
+            
+            <div className="flex text-sm justify-between text-[#b3b3b3] !mt-2">
+                <div className="flex items-center cursor-default" onClick={()=>setRememberMe(!rememberMe)}>
+                    {!rememberMe ? <ImCheckboxUnchecked className="text-[gray] h-4 w-4"/> : <ImCheckboxChecked className="text-[gray] h-4 w-4"/>}
+                    <span className="pl-1 select-none">Remember me</span>
+                </div>
+                <div>
+                    <a href="https://help.netflix.com/en/" className="text-[#b3b3b3] hover:underline">Need help?</a>
+                </div>
+            </div>
 
             <div className='text-[gray]'>
                 <div>
@@ -111,17 +123,18 @@ const Login = () => {
                 </div>
             
 
-                <div className='text-[gray] mt-[20px] text-[14px] font-light tracking-tight leading-none'>
+                <div className='text-[gray] mt-[20px] text-[14px] tracking-tight leading-none w-full'>
                     This page is protected by Google reCAPTCHA to
                     
                     ensure you're not a bot. <a onClick={()=>setLearnMore(!learnMore)} className='text-[#0080ff] hover:underline cursor-pointer'>Learn more.</a>
                 
                 { learnMore &&
-                    <div className='text-[gray] text-[14px] mt-[12px] font-light tracking-tight leading-none '>
+                    <div className='text-[gray] text-[14px] mt-[12px] tracking-tight leading-none w-full'>
                     The information collected by Google reCAPTCHA is subject to the Google <a target="_blank" href="https://policies.google.com/terms" className='text-[#0080ff] hover:underline'>Privacy Policy</a> and <a target="_blank" href="https://policies.google.com/privacy" className='text-[#0080ff] hover:underline'>Terms of Service</a>, and is used for providing, maintaining, and improving the reCAPTCHA service and for general security purposes (it is not used for personalised advertising by Google).
                     </div>
                 }
                 </div>
+                
             </div>
         </form>
     </div>

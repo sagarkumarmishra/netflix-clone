@@ -14,6 +14,8 @@ module.exports = {
     // added by me 
     fontFamily: {
       'sans': ['Helvetica', 'Arial', 'sans-serif'],
+      "boldly": ['Work Sans', 'sans-serif'],
+      "para": ['Helvetica Neue', "Helvetica", 'Arial', 'sans-serif']
     }
   },
   plugins: [

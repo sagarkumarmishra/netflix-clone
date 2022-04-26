@@ -9,10 +9,10 @@ import Row from '../components/Row'
 import useAuth from '../hooks/useAuth'
 import { Movie } from '../typings'
 import requests from '../utils/requests'
-import { getProducts, Product } from "@stripe/firestore-stripe-payments";
-import payments from "../lib/stripe"
+import { getProducts, Product } from '@stripe/firestore-stripe-payments'
+import payments from '../lib/stripe'
 import useSubscription from '../hooks/useSubscription'
-import {movieState} from "../atoms/modalAtom"
+import { movieState } from '../atoms/modalAtom'
 import useList from '../hooks/useList'
 
 interface Props {
@@ -37,20 +37,23 @@ const Home = ({
   romanceMovies,
   topRated,
   trendingNow,
-  }:Props) => {
-    
-    const {user, loading} = useAuth()
-    const showModal = useRecoilValue(modalState)
-    const subscription = useSubscription(user)
-    const movie = useRecoilValue(movieState)
-    const list = useList(user?.uid)
+}: Props) => {
+  const { user, loading } = useAuth()
+  const showModal = useRecoilValue(modalState)
+  const subscription = useSubscription(user)
+  const movie = useRecoilValue(movieState)
+  const list = useList(user?.uid)
 
-    if(loading || subscription === null) return null
+  if (loading || subscription === null) return null
 
-    if(!subscription) return <Plans products={products} />
-  
+  if (!subscription) return <Plans products={products} />
+
   return (
-    <div className={`relative h-screen bg-gradient-to-b lg:h-[140vh] ${showModal && "!h-screen overflow-hidden"}`}>
+    <div
+      className={`relative h-screen bg-gradient-to-b lg:h-[140vh] ${
+        showModal && '!h-screen overflow-hidden'
+      }`}
+    >
       <Head>
         <title>Netflix</title>
         <link rel="icon" href="/favicon.ico" />
@@ -58,19 +61,19 @@ const Home = ({
 
       {/* Lets build it 🚀🚀 */}
 
-      <Header/>
+      <Header />
 
-      <main className='relative pl-4 pb-24 md:space-y-24 lg:pl-16'>
+      <main className="relative pl-4 pb-24 md:space-y-24 lg:pl-16">
         {/* Top Banner */}
-        <Banner netflixOriginals={netflixOriginals}/>
+        <Banner netflixOriginals={netflixOriginals} />
 
         {/* Scrollable Rows */}
-        <section className='md:space-y-24'>
+        <section className="md:space-y-24">
           <Row title="Trending Now" movies={trendingNow} />
           <Row title="Top Rated" movies={topRated} />
           <Row title="Action Thrillers" movies={actionMovies} />
           {/* My List */}
-          {list.length > 0  && <Row title="My List" movies={list}/>}
+          {list.length > 0 && <Row title="My List" movies={list} />}
           <Row title="Comedies" movies={comedyMovies} />
           <Row title="Scary Movies" movies={horrorMovies} />
           <Row title="Romance Movies" movies={romanceMovies} />
@@ -78,11 +81,7 @@ const Home = ({
         </section>
       </main>
 
-      <footer>
-        Hii I am footer
-      </footer>
-
-      {showModal && <Modal/>}
+      {showModal && <Modal />}
     </div>
   )
 }
@@ -94,8 +93,8 @@ export const getServerSideProps = async () => {
     includePrices: true,
     activeOnly: true,
   })
-  .then((res)=>res)
-  .catch((error) => console.log(error.message))
+    .then((res) => res)
+    .catch((error) => console.log(error.message))
 
   const [
     netflixOriginals,
@@ -128,6 +127,6 @@ export const getServerSideProps = async () => {
       romanceMovies: romanceMovies.results,
       documentaries: documentaries.results,
       products,
-    }
+    },
   }
 }

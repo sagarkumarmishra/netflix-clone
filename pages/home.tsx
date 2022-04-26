@@ -49,7 +49,7 @@ const home = () => {
           <h2 className="mt-2 mb-2 text-lg md:mt-4 md:mb-8 md:text-[27px]">
             Watch anywhere. Cancel anytime.
           </h2>
-          <p className="px-3 text-center text-lg md:px-0 md:text-xl">
+          <p className="px-3 text-center text-base leading-5 md:px-0 md:text-xl">
             Ready to watch? Enter your email to create or restart your
             membership
           </p>

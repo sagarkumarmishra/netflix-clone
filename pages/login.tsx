@@ -4,6 +4,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import useAuth from '../hooks/useAuth'
+import Loader from '../components/Loader'
 
 interface Inputs {
   email: string
@@ -12,15 +13,15 @@ interface Inputs {
 
 const Login = () => {
   const [login, setLogin] = useState(false)
-  const { signIn, signUp, loginErr } = useAuth()
+  const { signIn, signUp, loginErr, loading } = useAuth()
   const [learnMore, setLearnMore] = useState(false)
-  // const [show, setShow] = useState(false)  //for show hide button
+  const [rememberMe, setRememberMe] = useState(true)
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>()
-  const [rememberMe, setRememberMe] = useState(true)
 
   const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
     if (login) {
@@ -116,11 +117,12 @@ const Login = () => {
           </label>
         </div>
 
+        {/* Sign In Button */}
         <button
           className="!mt-10 w-full rounded bg-[#e50914] py-3 font-semibold"
           onClick={() => setLogin(true)}
         >
-          Sign In
+          {loading ? <Loader color="dark:fill-gray-300" /> : 'Sign In'}
         </button>
 
         <div className="!mt-2 flex justify-between text-sm text-[#b3b3b3]">
@@ -139,6 +141,7 @@ const Login = () => {
             <a
               href="https://help.netflix.com/en/"
               className="text-[#b3b3b3] hover:underline"
+              target="_blank"
             >
               Need help?
             </a>
@@ -147,6 +150,7 @@ const Login = () => {
 
         {/* <button onClick={signInWithFacebook}>signInWithFacebook</button> */}
 
+        {/* Sign Up Button */}
         <div className="text-[gray]">
           <div>
             New to Netflix?{' '}

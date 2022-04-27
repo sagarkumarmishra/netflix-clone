@@ -89,7 +89,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   // sign-in
   const signIn = async (email: string, password: string) => {
     setLoading(true)
-    console.log('sign-in-start : ', loading)
 
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -105,7 +104,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setLoginErr(msg[1])
       })
       .finally(() => setLoading(false))
-    console.log('sign-in-end : ', loading)
   }
 
   // sign in with facebook
